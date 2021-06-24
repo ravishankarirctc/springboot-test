@@ -1,0 +1,30 @@
+version: '3'
+services: 
+  my-redis-server:
+    image: 'redis'
+  my-microservice-app:
+    # this is to auto restart the container in case container stops due to app failuer - 
+    # 'no' - never restart 
+    # on-failure - it restart the conatiner only when exit code is other than 0 in application, if exit code is 0 then it will not restart 
+    # always - will always restart in any failure
+    restart: 'on-failure'
+    build: .
+    ports: 
+      - "1000:1122"
+
+
+
+#to build commands- ###
+
+#The following only builds the images, does not start the containers:
+#docker-compose build
+
+#The following builds the images if the images do not exist and starts the containers:
+#docker-compose up
+
+#If you add the --build option, it is forced to build the images even when not needed:
+#docker-compose up --build
+
+#The following skips the image build process:
+#docker-compose up --no-build
+     
