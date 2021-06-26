@@ -1,0 +1,11 @@
+1. To apply Kubernetes Objects(Deployment, Service, etc) to kubernetes 
+
+	kubectl apply -f <filename.yml>
+
+
+2. Create Secrect in kubernetes: 
+
+	kubectl create secret generic db-password -- from-literals db_pass=Brcm-123
+	kubectl create secret generic okta-api-key -- from-literals okt_api_key=Ravi-123
+
+

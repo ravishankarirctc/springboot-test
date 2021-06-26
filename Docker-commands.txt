@@ -1,0 +1,15 @@
+1. To Build the image using Docker file-
+	docker build -t ravisaditya/orderms:v1 .
+	
+2. To push the docker image to docker hub-
+	docker push ravisaditya/orderms
+	
+3. To list out the running containers in docker: 
+	>docker ps
+	>docker ps --all
+4. 
+	
+
+	
+
+	

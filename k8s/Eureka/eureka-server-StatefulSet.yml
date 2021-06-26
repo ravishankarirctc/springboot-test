@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet                          # type of object we are creating, here we are creating of type "SatefuSet" for stateful app, here eureka needs to have static DNS (domain) so that other MS appsa can register with it.
+metadata:                                 # Details about above Object - "SatefuSet"
+  name: eureka-node                   # name of above object - "SatefuSet"
+
+
+spec:  
+  serviceName: eureka         # specification of "SatefuSet" object 
+  replicas: 1                             # 3 pods will be created by "SatefuSet" config
+  
+  selector: 
+    matchLabels:
+      app: eureka        # key to match with pod -> line number: 18 
+  
+  template:                               # template is the configuration of pods - Pod Template 
+    
+    metadata: 
+      labels: 
+        app: eureka     # key to map with "Service" object
+    
+    spec:                                 # specification of Pod
+      containers:                         #container configuration
+        - name: eureka
+          image: ravisaditya/eureka-server:v1
+          ports: 
+            - containerPort: 8000
+            
+          env: 
+            - name: EUREKS_SERVER_ADDRESS
+              valueFrom: 
+                configMapKeyRef: 
+                    name: eureka-config-map
+                    key: eureka_server_address
+                
+   
+        
+      

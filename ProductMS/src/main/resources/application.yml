@@ -1,0 +1,13 @@
+server:
+  port: 8003
+  
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone : http://eureka-node-0.eureka:8000/eureka,http://eureka-node-1.eureka:8000/eureka,http://eureka-node-2.eureka:8000/eureka
+  instance:
+#    preferIpAddress: true
+    hostname: prodms-cluster-ip-service # where my Microservice (ProdMS) is running, so that Eureka canhave detail of host of this MS in its registery.
+ 

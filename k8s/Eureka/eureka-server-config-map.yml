@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+    name: eureka-config-map
+data: 
+    # if you want to deploy n instances of eureka cluster,
+    # you should set eureka_service_address: http://eureka-0.eureka:8000/eureka,...,http://eureka-(n-1).eureka:8000/eureka
+    eureka_server_address: http://eureka-node-0.eureka:8000/eureka,http://eureka-node-1.eureka:8000/eureka,http://eureka-node-2.eureka:8000/eureka
+    
+    

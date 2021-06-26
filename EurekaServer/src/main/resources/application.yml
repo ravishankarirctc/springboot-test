@@ -1,0 +1,78 @@
+#server:
+#  port: 8000
+#
+#eureka:
+#  instance:
+##    preferIpAddress: true
+##    hostname: ${HOSTNAME}.eureka-server
+#    hostname: localhost
+#  client:
+#    registerWithEureka: false
+#    fetchRegistry: false
+#    serviceUrl:
+#       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#
+#
+
+---
+# This default profile is used when running a single instance completely standalone:
+spring:
+  profiles: default
+server:
+  port: 8000  
+eureka:
+  instance:
+    hostname: eureka-node-0.eureka
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/    
+ 
+---
+spring:
+  profiles: peer-1
+  application:
+    name: eureka-server-clustered
+server:
+  port: 9001  
+eureka:
+  instance:
+    hostname: eureka-node-0.eureka    
+  client:
+    registerWithEureka: true
+    fetchRegistry: true       
+    serviceUrl:
+      defaultZone: http://eureka-node-1.eureka:8000/eureka,http://eureka-node-2.eureka:8000/eureka
+ 
+---
+spring:
+  profiles: peer-2
+  application:
+    name: eureka-server-clustered   
+server:
+  port: 9002
+eureka:
+  instance:
+    hostname: eureka-node-1.eureka      
+  client:
+    registerWithEureka: true
+    fetchRegistry: true       
+    serviceUrl:
+      defaultZone: http://eureka-node-0.eureka:8000/eureka,http://eureka-node-2.eureka:8000/eureka
+ 
+---
+spring:
+  profiles: peer-3
+  application:
+    name: eureka-server-clustered  
+server:
+  port: 9003
+eureka:
+  instance:
+    hostname: eureka-node-2.eureka    
+  client:
+    registerWithEureka: true
+    fetchRegistry: true   
+    serviceUrl:
+      defaultZone: http://eureka-node-0.eureka:8000/eureka,http://eureka-node-1.eureka:8000/eureka

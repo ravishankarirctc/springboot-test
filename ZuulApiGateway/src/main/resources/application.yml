@@ -1,0 +1,60 @@
+#spring:
+#  aop:
+#    proxyTargetClass: true
+#  application:
+#    name: ZuulAPIGateway
+
+
+# Define the port for API gateway server
+server:
+  port: 8001
+
+
+
+# Define the Eureka server registery that handles service registration
+  
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone : http://eureka-node-0.eureka:8000/eureka,http://eureka-node-1.eureka:8000/eureka,http://eureka-node-2.eureka:8000/eureka
+  instance:
+    preferIpAddress: true
+    hostname: zuul-loadbalancer-service #this key came from zuul-loadbalancer-service-> This host name is saying where my Microservice (Zuul MS) is running, so that Eureka can have detail of host of this MS in its registery.
+    
+
+zuul:
+  prefix: /api/v1
+  routes:
+    Order-Service: /order/**
+    Product-Service: /prod/**
+  
+  add-proxy-headers: true
+        
+ribbon:
+  ConnectTimeout: 300000
+  ReadTimeout: 300000
+  eureka:
+    enabled: true
+
+security:
+  # Disable Spring Boot basic authentication
+  basic:
+    enabled: false
+#  oauth2:
+##    sso:
+##      loginPath: /login
+
+
+#logging:
+#  level.org.springframework.security: ERROR
+#  level.com.broadcom.support: INFO
+
+
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: false

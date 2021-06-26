@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment                          # type of object we are creating, here we are creating of type "Deployment"
+metadata:                                 # Details about above Object - "Deployment"
+  name:   zuul-server-deployment              # name of above object - "Deployment"
+
+
+spec:                                     # specification of "Deployment" object 
+  replicas: 1                             # 1 pod will be created by "Deployment" config
+  
+  selector: 
+    matchLabels:
+      component: zuul-server        # key to match with pod -> line number: 17 
+  
+  template:                               # template is the configuration of pods - Pod Template 
+    
+    metadata: 
+      labels: 
+        component: zuul-server     # key to map with "Service" object
+    
+    spec:                                 # specification of Pod
+      containers:                         #container configuration
+        - name: zuul-server-container
+          image: ravisaditya/zuul-server:v2
+          ports: 
+            - containerPort: 8001
+                
+   
+        
+      

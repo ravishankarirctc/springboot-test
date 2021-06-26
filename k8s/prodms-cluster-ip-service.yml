@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: prodms-cluster-ip-service
+ 
+spec: 
+  type: ClusterIP
+  selector: 
+    component: product-ms
+  ports: 
+    - port: 8003
+      targetPort: 8003

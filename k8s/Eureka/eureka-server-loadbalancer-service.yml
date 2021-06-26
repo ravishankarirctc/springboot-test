@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: eureka-loadbalancer-service
+spec: 
+  type: LoadBalancer
+  selector: 
+    app: eureka # This key-value is from Deployment.yml, now it is "StatefulSet.yml" of Eureka Server
+  ports: 
+    - name: port-eureka-loadbalancer
+      protocol: TCP
+      port: 8010
+      targetPort: 8000
+    
