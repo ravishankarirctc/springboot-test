@@ -1,0 +1,23 @@
+spring: 
+  application: 
+    name: spring-hibernate
+    
+server:
+  port: 8004
+  
+
+#Hibernate Configuration
+
+hibernate.show_sql: true
+hibernate.hbm2ddl.auto: none
+hibernate.cache.use_second_level_cache: true
+hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+
+
+database.driver: oracle.jdbc.driver.OracleDriver
+database.url: jdbc:oracle:thin:@localhost:1521:xe
+database.user: bot
+database.password: bot
+hibernate.dialect: org.hibernate.dialect.Oracle12cDialect
+
+

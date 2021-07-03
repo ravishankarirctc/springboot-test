@@ -1,0 +1,14 @@
+server:
+  port: 8822
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone : http://eureka-node-0.eureka:8000/eureka,http://eureka-node-1.eureka:8000/eureka,http://eureka-node-2.eureka:8000/eureka
+#      defaultZone : http://localhost:8010/eureka
+  instance:
+    preferIpAddress: true #enable to access the app via its IP address
+    hostname: auth-server-cluster-ip-service # where my Microservice (OrderMS) is running, so that Eureka can have detail of host of this MS in its registery.
+    

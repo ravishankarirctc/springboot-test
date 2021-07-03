@@ -7,7 +7,7 @@
 
 # Define the port for API gateway server
 server:
-  port: 8001
+  port: 8008
 
 
 
@@ -19,6 +19,7 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone : http://eureka-node-0.eureka:8000/eureka,http://eureka-node-1.eureka:8000/eureka,http://eureka-node-2.eureka:8000/eureka
+#      defaultZone : http://localhost:8010/eureka
   instance:
     preferIpAddress: true
     hostname: zuul-loadbalancer-service #this key came from zuul-loadbalancer-service-> This host name is saying where my Microservice (Zuul MS) is running, so that Eureka can have detail of host of this MS in its registery.
@@ -29,6 +30,11 @@ zuul:
   routes:
     Order-Service: /order/**
     Product-Service: /prod/**
+    Auth-Server:
+      sensitiveHeaders:
+      path: /oauth/**
+      stripPrefix: false
+      
   
   add-proxy-headers: true
         
@@ -40,11 +46,21 @@ ribbon:
 
 security:
   # Disable Spring Boot basic authentication
-  basic:
-    enabled: false
-#  oauth2:
-##    sso:
-##      loginPath: /login
+#  basic:
+#    enabled: false
+  oauth2:
+    resource:
+      jwt:
+        key-value:  |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5jpjZuKNzicLNpgyYJ1F
+          7XEJBfAEfacbY5Y5n3oSFhPIk1a91SkBp6XZAhZiGAwqrZpSrwNDipzexzU/S+J0
+          fHYIQPgEY9BffnEIxtS+Mgi1y2fQrVJxAiSOiHMBqrAn5W8GLN5c/e2lRsL+I9ia
+          +xDcqbAPGA0imgsIu0bDM5iwqGyX9ZPj92BepV6R89k3KBH7wjL4ksRxP5Uz8OcC
+          wKzmuwp7uK/bAkzi/ZCa+JSEFhT0SOZJMsthlswaCPI9i2Mk21RnkFCK2iewtAS9
+          hplMd3OrQzxbi502v4x1hHMIILmCp2RYHy3KH8snY/gtdErLHrOH5p0c1N9O/TcG
+          OwIDAQAB
+          -----END PUBLIC KEY-----
 
 
 #logging:

@@ -20,9 +20,9 @@ spec:                                     # specification of "Deployment" object
     spec:                                 # specification of Pod
       containers:                         #container configuration
         - name: zuul-server-container
-          image: ravisaditya/zuul-server:v2
+          image: ravisaditya/zuul-server
           ports: 
-            - containerPort: 8001
+            - containerPort: 8008
                 
    
         

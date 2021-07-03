@@ -5,7 +5,7 @@ metadata:                                 # Details about above Object - "Deploy
 
 
 spec:                                     # specification of "Deployment" object 
-  replicas: 1                             # 3 pods will be created by "Deployment" config
+  replicas: 1                            # 3 pods will be created by "Deployment" config
   
   selector: 
     matchLabels:
@@ -19,10 +19,10 @@ spec:                                     # specification of "Deployment" object
     
     spec:                                 # specification of Pod
     
-      volumes:
-        - name: ms-storage
-          persistentVolumeClaim:
-            claimName: persistent-volume-claim
+      # volumes:
+      #   - name: ms-storage
+      #     persistentVolumeClaim:
+      #       claimName: persistent-volume-claim
      
       containers:                         #container configuration
         - name: orderms-container
@@ -30,9 +30,9 @@ spec:                                     # specification of "Deployment" object
           ports: 
             - containerPort: 8002 
             
-          volumeMounts:
-            - name: ms-storage
-              mountPath: /var/storage
+          # volumeMounts:
+          #   - name: ms-storage
+          #     mountPath: /var/storage
               
 #          env: 
 #            - name: DB-PASSWORD

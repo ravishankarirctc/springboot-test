@@ -21,7 +21,7 @@ spec:
     spec:                                 # specification of Pod
       containers:                         #container configuration
         - name: eureka
-          image: ravisaditya/eureka-server:v1
+          image: ravisaditya/eureka-server
           ports: 
             - containerPort: 8000
             

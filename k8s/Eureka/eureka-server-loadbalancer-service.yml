@@ -9,6 +9,6 @@ spec:
   ports: 
     - name: port-eureka-loadbalancer
       protocol: TCP
-      port: 8010
+      port: 8011
       targetPort: 8000
     
